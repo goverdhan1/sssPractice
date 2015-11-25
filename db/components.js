@@ -76,7 +76,6 @@ exports.getComponent = function(id, callback) {
     }
   );
 };
-
 exports.addComponent = function(dataUri, callback) {
   exports.queryDb(function(db) {
     var stmt = db.prepare('INSERT INTO Components VALUES (?,?,?,?)');

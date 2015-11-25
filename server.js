@@ -46,7 +46,6 @@ app.put('/components', function(req, res) {
     }
   });
 });
-
 // edit a component
 app.post('/components', function(req, res) {
   var component = {};

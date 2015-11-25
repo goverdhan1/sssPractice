@@ -149,7 +149,6 @@ $("#editSubmitBtn").on("click", function(e){
        });
     }
 });
-
 $("#confirmDeleteBtn").on("click", function(e){
     // $("#editForm").validate();
     // if($("#editForm").valid()){
