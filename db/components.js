@@ -100,9 +100,10 @@ exports.updateComponent = function(dataUri, callback) {
   });
 };
 
-exports.deleteComponent = function(dataUri, callback) {
+exports.deleteComponent = function(id, callback) {
+  id = safeId(id);
   exports.queryDb(function(db) {
-    var stmt = db.prepare('DELETE FROM Components WHERE id = ' + id);
+    var stmt = db.prepare('DELETE FROM Components WHERE id =' + id);
     stmt.finalize();
   });
 };
