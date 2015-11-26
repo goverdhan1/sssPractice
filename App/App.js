@@ -159,6 +159,8 @@ $("#confirmDeleteBtn").on("click", function(e){
     //         "email":$("#editForm #email").val()
     //     };
     //         console.log(JSON.stringify(formData));
+
+
     
        $.ajax({
             url: "/components",

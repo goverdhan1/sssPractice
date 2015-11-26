@@ -91,6 +91,8 @@ exports.addComponent = function(dataUri, callback) {
   });
 };
 
+
+
 exports.updateComponent = function(dataUri, callback) {
   exports.queryDb(function(db) {
     var stmt = db.prepare('UPDATE Components SET name=' + dataUri.name + 'email=' + dataUri.email + 'endpoint=' +dataUri.endpoint+ 'phone=' +dataUri.phone);

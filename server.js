@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Make app a public folder
 app.use('/', express.static(__dirname + '/App'));
 
+
 // list all components
 app.get('/components', function(req, res) {
   database.getComponents(function(err, components) {
