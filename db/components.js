@@ -6,7 +6,6 @@ var dbfile = path.join('./db/dashboard.db');
 
 var sqlite3 = require('sqlite3').verbose();
 
-
 function safeId(id) {
   return String(Number(id));
 }
@@ -49,7 +48,7 @@ exports.queryRows = function(sql, callback) {
 
 exports.getComponents = function(callback) {
   exports.queryRows(
-    'SELECT rowid AS id, name, email, endpoint, phone FROM Components',
+    'SELECT id, name, email, endpoint, phone FROM Components',
     function(err, rows) {
       if (err) {
         callback(err);
@@ -63,7 +62,7 @@ exports.getComponents = function(callback) {
 exports.getComponent = function(id, callback) {
   id = safeId(id);
   exports.queryRows(
-    'SELECT rowid AS id, name, email, endpoint, phone FROM Components WHERE id = ' + id,
+    'SELECT id, name, email, endpoint, phone FROM Components WHERE id = ' + id,
     function(err, rows) {
       var row = rows[0];
       if (err) {
@@ -76,11 +75,12 @@ exports.getComponent = function(id, callback) {
     }
   );
 };
+
 exports.addComponent = function(dataUri, callback) {
   exports.queryDb(function(db) {
     var stmt = db.prepare('INSERT INTO Components VALUES (?,?,?,?)');
     stmt.run(dataUri.name,dataUri.email,dataUri.endpoint,dataUri.phone);
-    stmt.finalize();
+  //  stmt.finalize();
     db.each('SELECT last_insert_rowid() as id', function(err, row) {
       if (err) {
         callback(err);
@@ -91,12 +91,10 @@ exports.addComponent = function(dataUri, callback) {
   });
 };
 
-
-
 exports.updateComponent = function(dataUri, callback) {
+  console.log(dataUri)
   exports.queryDb(function(db) {
-    var stmt = db.prepare('UPDATE Components SET name=' + dataUri.name + 'email=' + dataUri.email + 'endpoint=' +dataUri.endpoint+ 'phone=' +dataUri.phone);
-    stmt.finalize();
+    var stmt = db.run('UPDATE Components SET name ="' + dataUri.name + '", email ="' + dataUri.email + '", phone ="' + dataUri.phone +'" WHERE id =' + dataUri.id);
     exports.getComponent(dataUri.id, callback);
   });
 };
@@ -104,8 +102,7 @@ exports.updateComponent = function(dataUri, callback) {
 exports.deleteComponent = function(id, callback) {
   id = safeId(id);
   exports.queryDb(function(db) {
-    var stmt = db.prepare('DELETE FROM Components WHERE id =' + id);
-    stmt.finalize();
+    var stmt = db.run('DELETE FROM Components WHERE id =' + id);
+    console.log(id)
   });
 };
-

@@ -46,9 +46,7 @@ $(document).ready(function () {
     };
 
     $('#table-javascript').on('click-row.bs.table', function (e, row, $el) {
-
         selectedRow=row;
-        alert(selectedRow)
         console.log(selectedRow);
     });
 
@@ -129,18 +127,16 @@ $("#editSubmitBtn").on("click", function(e){
             "phone":$("#editForm #phone").val(), 
             "email":$("#editForm #email").val()
         };
-            console.log(JSON.stringify(formData));
-    
+//        formData = JSON.stringify(formData);
        $.ajax({
             url: "/components",
-            data:JSON.stringify(formData), 
+            data:formData, 
             type: "post",
             dataType: "json",
             success: function (result) {
             console.log(result)
             myTable.append(result);
             $('#editModal').modal('hide');
-                console.log(JSON.stringify(formData));
 
             },
            error:function(){
@@ -160,8 +156,7 @@ $("#confirmDeleteBtn").on("click", function(e){
     //     };
     //         console.log(JSON.stringify(formData));
 
-
-    
+   
        $.ajax({
             url: "/components",
             data:{"id":selectedRow.id}, 
@@ -169,7 +164,7 @@ $("#confirmDeleteBtn").on("click", function(e){
             dataType: "json",
             success: function (result) {
             console.log(result)
-            myTable.append(result);
+            // myTable.append(result);
             $('#deleteModal').modal('hide');
                 //console.log(JSON.stringify(formData));
             },

@@ -53,13 +53,14 @@ app.post('/components', function(req, res) {
   component.id = req.body.id;
   component.name = req.body.name;
   component.email = req.body.email;
-  component.endpoint = req.body.endpoint;
   component.phone = req.body.phone;  
+
   database.updateComponent(component, function(err, component) {
     if (err) {
       res.json(400, {error: err.message});
     } else {
       res.json(component);
+      console.log(component);
     }
   });
 });
@@ -71,8 +72,11 @@ app.delete('/components', function(req, res) {
   database.deleteComponent(req.body.id, function(err, component) {
     if (err) {
       res.json(400, {error: err.message});
+            console.log(component);
+
     } else {
       res.json(component);
+      console.log(component);
     }
   });
 });
